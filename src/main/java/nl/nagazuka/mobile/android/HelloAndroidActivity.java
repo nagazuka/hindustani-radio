@@ -12,6 +12,7 @@ public class HelloAndroidActivity extends Activity implements MediaPlayer.OnPrep
   
     private static String TAG = "hindustani-radio";
     private static MediaPlayer mediaPlayer = null;
+    private static TextView welcomeText = null;
 
     /**
      * Called when the activity is first created.
@@ -24,26 +25,27 @@ public class HelloAndroidActivity extends Activity implements MediaPlayer.OnPrep
         super.onCreate(savedInstanceState);
 		Log.i(TAG, "onCreate");
         setContentView(R.layout.main);
+        if (welcomeText == null) {
+          welcomeText = (TextView) findViewById(R.id.welcome_text);
+        }
     }
 
     public void onPlay(final View view) throws Exception {
-      final TextView welcomeText = (TextView) findViewById(R.id.welcome_text);
       welcomeText.setText("Loading...");
 
       String url = "http://icecast.xs4all.nl:8000/AmorFM"; // your URL here
 
       if (mediaPlayer == null) {
         mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setDataSource(url);
+        mediaPlayer.prepare(); // might take long! (for buffering, etc)
+        mediaPlayer.start();
       }
-      mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-      mediaPlayer.setDataSource(url);
-      mediaPlayer.prepareAsync(); // might take long! (for buffering, etc)
-      mediaPlayer.start();
       welcomeText.setText("Playing!");
     }
 
     public void onStop(final View view) {
-      final TextView welcomeText = (TextView) findViewById(R.id.welcome_text);
       welcomeText.setText("Stopping...");
       if (mediaPlayer != null) {
         mediaPlayer.stop();
@@ -54,6 +56,7 @@ public class HelloAndroidActivity extends Activity implements MediaPlayer.OnPrep
     public void onPrepared(MediaPlayer mp) {
       if (mp != null) {
         mp.start();
+        welcomeText.setText("Playing!");
       }
     }
 
