@@ -13,8 +13,9 @@ public class HelloAndroidActivity extends Activity implements MediaPlayer.OnPrep
     private static String TAG = "hindustani-radio";
     private static MediaPlayer mediaPlayer = null;
     private static TextView welcomeText = null;
-    private static String UJALA_URL = "mms://live1.xs4all.nl/ujala/";
+    private static String UJALA_URL = "http://live1.xs4all.nl/ujala/";
     private static String AMORFM_URL = "http://icecast.xs4all.nl:8000/AmorFM"; 
+    private static String SUNRISEFM_URL = "http://server10.suristream.com:8006";
     /**
      * Called when the activity is first created.
      * @param savedInstanceState If the activity is being re-initialized after 
