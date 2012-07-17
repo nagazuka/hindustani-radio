@@ -13,7 +13,8 @@ public class HelloAndroidActivity extends Activity implements MediaPlayer.OnPrep
     private static String TAG = "hindustani-radio";
     private static MediaPlayer mediaPlayer = null;
     private static TextView welcomeText = null;
-
+    private static String UJALA_URL = "mms://live1.xs4all.nl/ujala/";
+    private static String AMORFM_URL = "http://icecast.xs4all.nl:8000/AmorFM"; 
     /**
      * Called when the activity is first created.
      * @param savedInstanceState If the activity is being re-initialized after 
@@ -33,16 +34,14 @@ public class HelloAndroidActivity extends Activity implements MediaPlayer.OnPrep
     public void onPlay(final View view) throws Exception {
       welcomeText.setText("Loading...");
 
-      String url = "http://icecast.xs4all.nl:8000/AmorFM"; // your URL here
-
       if (mediaPlayer == null) {
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mediaPlayer.setDataSource(url);
-        mediaPlayer.prepare(); // might take long! (for buffering, etc)
-        mediaPlayer.start();
+        mediaPlayer.setDataSource(AMORFM_URL);
+        mediaPlayer.setOnPreparedListener(this);
+        mediaPlayer.prepareAsync(); // might take long! (for buffering, etc)
+        welcomeText.setText("Loading...");
       }
-      welcomeText.setText("Playing!");
     }
 
     public void onStop(final View view) {

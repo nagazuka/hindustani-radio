@@ -9,8 +9,7 @@
     <name>hindustani-radio</name>
 
     <properties>
-        <platform.version> 2.3.3
-            </platform.version>
+        <platform.version>4.0.1.2</platform.version>
     </properties>
 
     <dependencies>
@@ -34,9 +33,9 @@
                     <resourceDirectory>${project.basedir}/res</resourceDirectory>
                     <nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
                     <sdk>
-                        <platform>10</platform>
+                        <platform>14</platform>
                     </sdk>
-                                        <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                    <undeployBeforeDeploy>true</undeployBeforeDeploy>
                 </configuration>
                 <extensions>true</extensions>
             </plugin>
